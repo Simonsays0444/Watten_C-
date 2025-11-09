@@ -13,22 +13,34 @@ namespace WattenForms
         public PlayerType PlayerType { get; set; }
 
 
-        public List<Card> GetPossibleCards(Card card)
+        public List<Card> GetPossibleCards(Card card1, Card card2, bool isPlayer1LastWinner)
         {
             List<Card> PossibleCards = new List<Card>();
-            
-            if (card == null || card.Value < 20)
+            Card firstCard;
+
+            if (isPlayer1LastWinner)
             {
-                return PlayerCards;
-            } 
-            else
+                firstCard = card1;
+            } else
             {
-                foreach (Card c in PlayerCards)
-                {
-                    PossibleCards.Add(c);
-                }
-                return PossibleCards;
+                firstCard = card2;
             }
+
+            if (firstCard.Value >= 20)
+            {
+                foreach (Card card in PlayerCards)
+                {
+                    if (card.Value >= 20)
+                    {
+                        PossibleCards.Add(card);
+                    }
+                }
+            }
+            if (PossibleCards.Count == 0)
+            {
+                PossibleCards = PlayerCards;
+            }
+            return PossibleCards;
         }
 
         public virtual string ChooseRank()
