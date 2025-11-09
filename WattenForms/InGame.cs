@@ -53,7 +53,8 @@ namespace WattenForms
             if (card1 == null || card2 == null)
             {
                 MessageBox.Show("Bitte wählen Sie 2 Karten!");
-            } else
+            } 
+            else
             {
                 if (card1.Value > 20 || card2.Value > 20 || card1.Suit == card2.Suit)
                 {
@@ -68,6 +69,20 @@ namespace WattenForms
                         player2.WinCount++;
                         isPlayer1LastWinner = false;
                         lblPlayer2WinCount.Text = player2.WinCount.ToString();
+                    } 
+                    else
+                    {
+                        if (isPlayer1LastWinner)
+                        {
+                            player1.WinCount++;
+                            lblPlayer1WinCount.Text = player1.WinCount.ToString();
+                        } 
+                        else
+                        {
+                            player2.WinCount++;
+                            isPlayer1LastWinner = false;
+                            lblPlayer2WinCount.Text = player2.WinCount.ToString();
+                        }
                     }
                 }
                 else
@@ -151,8 +166,9 @@ namespace WattenForms
             
             if(player2.PlayerType != PlayerType.Human)
             {
-                comboBoxCardsPlayer2.Text = player2.ChooseCard();
-                comboBoxCardsPlayer2.SelectedItem = player2.ChooseCard();
+                Card ChoosenCard = player2.ChooseCard(player2.GetPossibleCards((Card)comboBoxCardsPlayer1.SelectedItem, (Card)comboBoxCardsPlayer2.SelectedItem, isPlayer1LastWinner));
+                comboBoxCardsPlayer2.Text = ChoosenCard.Name;
+                comboBoxCardsPlayer2.SelectedItem = ChoosenCard;
 
                 ActivatePlayer1();
             }

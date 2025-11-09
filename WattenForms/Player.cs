@@ -60,9 +60,9 @@ namespace WattenForms
             return PlayerCards.FirstOrDefault().Suit;
         }
 
-        public virtual string ChooseCard()
+        public virtual Card ChooseCard(List<Card> PossibleCards)
         {
-            return PlayerCards.FirstOrDefault().Name;
+            return PossibleCards.FirstOrDefault();
         }
 
         public Player()
@@ -86,9 +86,9 @@ namespace WattenForms
             PlayerType = PlayerType.Bot;    
         }
 
-        public override string ChooseCard()
+        public override Card ChooseCard(List<Card> PossibleCards)
         {
-            return base.ChooseCard();
+            return base.ChooseCard(PossibleCards);
         }
 
         public override string ChooseRank()
