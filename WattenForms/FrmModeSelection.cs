@@ -31,7 +31,7 @@ namespace WattenForms
         private void btnBotEasy_Click(object sender, EventArgs e)
         {
             var player1 = new Player();
-            var player2 = new Bot();
+            var player2 = new BotEasy();
 
             RankAndSuitChoice rankAndSuitChoice = new RankAndSuitChoice(Globals.Deck, player1, player2);
             rankAndSuitChoice.Owner = this;
@@ -41,7 +41,13 @@ namespace WattenForms
 
         private void btnBotMedium_Click(object sender, EventArgs e)
         {
+            var player1 = new Player();
+            var player2 = new BotMedium();
 
+            RankAndSuitChoice rankAndSuitChoice = new RankAndSuitChoice(Globals.Deck, player1, player2);
+            rankAndSuitChoice.Owner = this;
+            rankAndSuitChoice.Show();
+            this.Hide();
         }
 
         private void btnBotHard_Click(object sender, EventArgs e)

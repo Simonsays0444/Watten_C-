@@ -78,9 +78,9 @@ namespace WattenForms
         }
     }
 
-    public class Bot : Player
+    public class BotEasy : Player
     {
-        public Bot()
+        public BotEasy()
         {
             Init();
             PlayerType = PlayerType.Bot;    
@@ -99,6 +99,32 @@ namespace WattenForms
         public override string ChooseSuit()
         {
             return base.ChooseSuit();
+        }
+    }
+
+
+    public class BotMedium : Player
+    {
+        public BotMedium()
+        {
+            Init();
+            PlayerType = PlayerType.Bot;
+        }
+
+        public override Card ChooseCard(List<Card> PossibleCards)
+        {
+            return base.ChooseCard(PossibleCards);
+        }
+
+        public override string ChooseRank()
+        {
+            return base.ChooseRank();
+        }
+
+        public override string ChooseSuit()
+        {
+            string ChoosenSuit = PlayerCards.GroupBy(k => k.Suit).OrderByDescending(g => g.Count()).First().Key.ToString();
+            return ChoosenSuit;
         }
     }
 }

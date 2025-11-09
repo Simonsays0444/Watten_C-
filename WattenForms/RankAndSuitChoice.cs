@@ -23,15 +23,15 @@ namespace WattenForms
             this.player1 = player1;
             this.player2 = player2;
 
-            btnShowCardsPlayer1.Visible = player1.PlayerType != PlayerType.Bot;
-            btnShowCardsPlayer2.Visible = player2.PlayerType != PlayerType.Bot;
+            btnShowCardsPlayer1.Visible = player1.PlayerType == PlayerType.Human;
+            btnShowCardsPlayer2.Visible = player2.PlayerType == PlayerType.Human;
             
-            comboBoxRank.Enabled = player1.PlayerType != PlayerType.Bot;
-            comboBoxSuit.Enabled = player2.PlayerType != PlayerType.Bot;
+            comboBoxRank.Enabled = player1.PlayerType == PlayerType.Human;
+            comboBoxSuit.Enabled = player2.PlayerType == PlayerType.Human;
             deck.Shuffle();
             DealCards(deck);
 
-            if (player1.PlayerType == PlayerType.Bot || player2.PlayerType == PlayerType.Bot)
+            if (player1.PlayerType != PlayerType.Human || player2.PlayerType != PlayerType.Human)
             {
                 comboBoxSuit.Text = player2.ChooseSuit();
                 comboBoxSuit.SelectedItem = player2.ChooseSuit();
