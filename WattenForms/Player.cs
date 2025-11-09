@@ -12,6 +12,25 @@ namespace WattenForms
         public List<Card> PlayerCards { get; set; }
         public PlayerType PlayerType { get; set; }
 
+
+        public List<Card> GetPossibleCards(Card card)
+        {
+            List<Card> PossibleCards = new List<Card>();
+            
+            if (card == null || card.Value < 20)
+            {
+                return PlayerCards;
+            } 
+            else
+            {
+                foreach (Card c in PlayerCards)
+                {
+                    PossibleCards.Add(c);
+                }
+                return PossibleCards;
+            }
+        }
+
         public virtual string ChooseRank()
         {
             return PlayerCards.FirstOrDefault().Rank;
