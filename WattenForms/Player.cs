@@ -26,21 +26,28 @@ namespace WattenForms
                 firstCard = card2;
             }
 
-            if (firstCard.Value >= 20)
+            if (firstCard == null)
             {
-                foreach (Card card in PlayerCards)
+                return PlayerCards;
+            } 
+            else
+            {
+                if (firstCard.Value >= 20)
                 {
-                    if (card.Value >= 20)
+                    foreach (Card card in PlayerCards)
                     {
-                        PossibleCards.Add(card);
+                        if (card.Value >= 20)
+                        {
+                            PossibleCards.Add(card);
+                        }
                     }
                 }
+                if (PossibleCards.Count == 0)
+                {
+                    PossibleCards = PlayerCards;
+                }
+                return PossibleCards;
             }
-            if (PossibleCards.Count == 0)
-            {
-                PossibleCards = PlayerCards;
-            }
-            return PossibleCards;
         }
 
         public virtual string ChooseRank()

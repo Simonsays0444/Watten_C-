@@ -162,12 +162,21 @@ namespace WattenForms
         {
             if (comboBoxCardsPlayer1.SelectedItem != null)
             {
-                ActivatePlayer2();
-                if (comboBoxCardsPlayer2.SelectedItem != null)
+                if (player1.GetPossibleCards((Card)comboBoxCardsPlayer1.SelectedItem, (Card)comboBoxCardsPlayer2.SelectedItem, isPlayer1LastWinner).Contains((Card)comboBoxCardsPlayer1.SelectedItem))
                 {
-                    comboBoxCardsPlayer2.Enabled = false;
+                    ActivatePlayer2();
+                    if (comboBoxCardsPlayer2.SelectedItem != null)
+                    {
+                        comboBoxCardsPlayer2.Enabled = false;
+                    }
+                    comboBoxCardsPlayer1.Enabled = false;
+                } 
+                else
+                {
+                    comboBoxCardsPlayer1.SelectedItem = null;
+                    comboBoxCardsPlayer1.Text = null;
+                    MessageBox.Show("Sie müssen einen Trumpf zugeben!!!");
                 }
-                comboBoxCardsPlayer1.Enabled=false;
             } 
             else
             {
@@ -179,10 +188,20 @@ namespace WattenForms
         {
             if (comboBoxCardsPlayer2.SelectedItem != null)
             {
-                ActivatePlayer1();
-                if (comboBoxCardsPlayer1.SelectedItem != null)
+                if (player2.GetPossibleCards((Card)comboBoxCardsPlayer1.SelectedItem, (Card)comboBoxCardsPlayer2.SelectedItem, isPlayer1LastWinner).Contains((Card)comboBoxCardsPlayer2.SelectedItem))
                 {
-                    comboBoxCardsPlayer1.Enabled = false;
+                    ActivatePlayer1();
+                    if (comboBoxCardsPlayer1.SelectedItem != null)
+                    {
+                        comboBoxCardsPlayer1.Enabled = false;
+                    }
+                    comboBoxCardsPlayer2.Enabled = false;
+                }
+                else
+                {
+                    comboBoxCardsPlayer2.SelectedItem = null;
+                    comboBoxCardsPlayer2.Text = null;
+                    MessageBox.Show("Sie müssen einen Trumpf zugeben!!!");
                 }
             }
             else
