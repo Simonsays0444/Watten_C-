@@ -149,10 +149,14 @@ namespace WattenForms
             {
                 if (player1.GetPossibleCards((Card)comboBoxCardsPlayer1.SelectedItem, (Card)comboBoxCardsPlayer2.SelectedItem, isPlayer1LastWinner).Contains((Card)comboBoxCardsPlayer1.SelectedItem))
                 {
-                    ActivatePlayer2();
+                    
                     if (comboBoxCardsPlayer2.SelectedItem != null)
                     {
                         comboBoxCardsPlayer2.Enabled = false;
+                    } 
+                    else
+                    {
+                        ActivatePlayer2();
                     }
                     comboBoxCardsPlayer1.Enabled = false;
                 } 
@@ -175,10 +179,13 @@ namespace WattenForms
             {
                 if (player2.GetPossibleCards((Card)comboBoxCardsPlayer1.SelectedItem, (Card)comboBoxCardsPlayer2.SelectedItem, isPlayer1LastWinner).Contains((Card)comboBoxCardsPlayer2.SelectedItem))
                 {
-                    ActivatePlayer1();
                     if (comboBoxCardsPlayer1.SelectedItem != null)
                     {
                         comboBoxCardsPlayer1.Enabled = false;
+                    }
+                    else
+                    {
+                        ActivatePlayer1();
                     }
                     comboBoxCardsPlayer2.Enabled = false;
                 }
