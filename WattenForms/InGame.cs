@@ -56,49 +56,18 @@ namespace WattenForms
             } 
             else
             {
-                if (card1.Value > 20 || card2.Value > 20 || card1.Suit == card2.Suit)
+                isPlayer1LastWinner = WhoIsTheWinner.GetWinner(card1, card2, isPlayer1LastWinner);
+                if(isPlayer1LastWinner)
                 {
-                    if (card1.Value > card2.Value)
-                    {
-                        player1.WinCount++;
-                        isPlayer1LastWinner = true;
-                        lblPlayer1WinCount.Text = player1.WinCount.ToString();
-                    }
-                    else if (card2.Value > card1.Value)
-                    {
-                        player2.WinCount++;
-                        isPlayer1LastWinner = false;
-                        lblPlayer2WinCount.Text = player2.WinCount.ToString();
-                    } 
-                    else
-                    {
-                        if (isPlayer1LastWinner)
-                        {
-                            player1.WinCount++;
-                            lblPlayer1WinCount.Text = player1.WinCount.ToString();
-                        } 
-                        else
-                        {
-                            player2.WinCount++;
-                            isPlayer1LastWinner = false;
-                            lblPlayer2WinCount.Text = player2.WinCount.ToString();
-                        }
-                    }
-                }
+                    player1.WinCount++;
+                    lblPlayer1WinCount.Text = player1.WinCount.ToString();
+                } 
                 else
                 {
-                    if (isPlayer1LastWinner)
-                    {
-                        player1.WinCount++;
-                        lblPlayer1WinCount.Text = player1.WinCount.ToString();
-                    }
-                    else
-                    {
-                        player2.WinCount++;
-                        isPlayer1LastWinner = false;
-                        lblPlayer2WinCount.Text = player2.WinCount.ToString();
-                    }
+                    player2.WinCount++;
+                    lblPlayer2WinCount.Text = player2.WinCount.ToString();
                 }
+
                 player1.PlayerCards.Remove(card1);
                 player2.PlayerCards.Remove(card2);
                 comboBoxCardsPlayer1.Text = null;
