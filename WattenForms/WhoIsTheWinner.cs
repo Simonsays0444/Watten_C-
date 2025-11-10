@@ -8,7 +8,7 @@ namespace WattenForms
 {
     public class WhoIsTheWinner
     {
-    public static bool GetWinner(Card card1, Card card2, bool isPlayer1LastWinner)
+        public static bool GetWinner(Card card1, Card card2, bool isPlayer1LastWinner)
         {
             if (card1 != null && card2 != null)
             {
@@ -30,6 +30,7 @@ namespace WattenForms
                     }
                 }
             }
+
             return isPlayer1LastWinner;
         }
     }

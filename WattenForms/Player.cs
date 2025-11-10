@@ -127,6 +127,7 @@ namespace WattenForms
                     winningCards.Add(card);
                 }
             }
+
             if (winningCards.Count > 0)
             {
                 choosenCard = winningCards.FirstOrDefault();
@@ -135,6 +136,7 @@ namespace WattenForms
             {
                 choosenCard = PossibleCards.FirstOrDefault();
             }
+
             return choosenCard;
         }
 
@@ -173,6 +175,7 @@ namespace WattenForms
                 }
             }
 
+            //Card cheapestWinningCard = winningCards.OrderByDescending(c => c.Value).FirstOrDefault();
             Card cheapestWinningCard = winningCards.FirstOrDefault();
 
             foreach (Card card in winningCards)

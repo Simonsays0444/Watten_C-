@@ -142,6 +142,8 @@ namespace WattenForms
                     bot2.WinCount++;
                     isPlayer1LastWinner = false;
                 }
+                bot1.PlayerCards.Remove(CardFromPlayer1);
+                bot2.PlayerCards.Remove(CardFromPlayer2);
             }
 
             if (bot1.WinCount == 3)
