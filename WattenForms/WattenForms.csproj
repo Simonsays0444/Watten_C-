@@ -55,6 +55,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmBotArena.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmBotArena.Designer.cs">
+      <DependentUpon>FrmBotArena.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmModeSelection.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     <Compile Include="WhoIsTheWinner.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmBotArena.resx">
+      <DependentUpon>FrmBotArena.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmModeSelection.resx">
       <DependentUpon>FrmModeSelection.cs</DependentUpon>

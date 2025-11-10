@@ -60,5 +60,13 @@ namespace WattenForms
             rankAndSuitChoice.Show();
             this.Hide();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmBotArena frmBotArena = new FrmBotArena(Globals.Deck);
+            frmBotArena.Owner = this;
+            frmBotArena.Show();
+            this.Hide();
+        }
     }
 }
