@@ -60,7 +60,7 @@ namespace WattenForms
             return PlayerCards.FirstOrDefault().Suit;
         }
 
-        public virtual Card ChooseCard(List<Card> PossibleCards)
+        public virtual Card ChooseCard(List<Card> PossibleCards, Card otherCard, bool isPlayer1LastWinner)
         {
             return PossibleCards.FirstOrDefault();
         }
@@ -86,9 +86,9 @@ namespace WattenForms
             PlayerType = PlayerType.Bot;    
         }
 
-        public override Card ChooseCard(List<Card> PossibleCards)
+        public override Card ChooseCard(List<Card> PossibleCards, Card otherCard, bool isPlayer1LastWinner)
         {
-            return base.ChooseCard(PossibleCards);
+            return base.ChooseCard(PossibleCards, otherCard, isPlayer1LastWinner);
         }
 
         public override string ChooseRank()
@@ -111,9 +111,27 @@ namespace WattenForms
             PlayerType = PlayerType.Bot;
         }
 
-        public override Card ChooseCard(List<Card> PossibleCards)
+        public override Card ChooseCard(List<Card> PossibleCards, Card otherCard, bool isPlayer1LastWinner)
         {
-            return base.ChooseCard(PossibleCards);
+            List<Card> winningCards = new List<Card>();
+            Card choosenCard;
+
+            foreach (Card card in PossibleCards)
+            {
+                if (WhoIsTheWinner.GetWinner(card, otherCard, isPlayer1LastWinner))
+                {
+                    winningCards.Add(card);
+                }
+            }
+            if (winningCards.Count > 0)
+            {
+                choosenCard = winningCards.FirstOrDefault();
+            }
+            else
+            {
+                choosenCard = PossibleCards.FirstOrDefault();
+            }
+            return choosenCard;
         }
 
         public override string ChooseRank()
@@ -125,6 +143,51 @@ namespace WattenForms
         public override string ChooseSuit()
         {
             string ChoosenSuit = PlayerCards.GroupBy(k => k.Suit).OrderByDescending(g => g.Count()).First().Key.ToString();
+            return ChoosenSuit;
+        }
+    }
+
+    public class BotHard : Player
+    {
+        public BotHard()
+        {
+            Init();
+            PlayerType = PlayerType.Bot;
+        }
+
+        public override Card ChooseCard(List<Card> PossibleCards, Card otherCard, bool isPlayer1LastWinner)
+        {
+            return base.ChooseCard(PossibleCards, otherCard, isPlayer1LastWinner);
+        }
+
+        public override string ChooseRank()
+        {
+            List<Card> NoKritCards = new List<Card>();
+            foreach (Card card in PlayerCards)
+            {
+                if (card.Name != "König Herz" && card.Name != "7 Schellen" && card.Name != "7 Eichel")
+                {
+                    NoKritCards.Add(card);
+                }
+            }
+
+
+            string ChoosenRank = NoKritCards.GroupBy(k => k.Rank).OrderByDescending(g => g.Count()).First().Key.ToString();
+            return ChoosenRank;
+        }
+
+        public override string ChooseSuit()
+        {
+            List<Card> NoKritCards = new List<Card>();
+            foreach (Card card in PlayerCards)
+            {
+                if (card.Name != "König Herz" && card.Name != "7 Schellen" && card.Name != "7 Eichel")
+                {
+                    NoKritCards.Add(card);
+                }
+            }
+
+            string ChoosenSuit = NoKritCards.GroupBy(k => k.Suit).OrderByDescending(g => g.Count()).First().Key.ToString();
             return ChoosenSuit;
         }
     }

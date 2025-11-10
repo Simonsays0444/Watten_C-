@@ -52,7 +52,13 @@ namespace WattenForms
 
         private void btnBotHard_Click(object sender, EventArgs e)
         {
+            var player1 = new Player();
+            var player2 = new BotHard();
 
+            RankAndSuitChoice rankAndSuitChoice = new RankAndSuitChoice(Globals.Deck, player1, player2);
+            rankAndSuitChoice.Owner = this;
+            rankAndSuitChoice.Show();
+            this.Hide();
         }
     }
 }

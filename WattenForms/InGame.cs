@@ -135,7 +135,7 @@ namespace WattenForms
             
             if(player2.PlayerType != PlayerType.Human)
             {
-                Card ChoosenCard = player2.ChooseCard(player2.GetPossibleCards((Card)comboBoxCardsPlayer1.SelectedItem, (Card)comboBoxCardsPlayer2.SelectedItem, isPlayer1LastWinner));
+                Card ChoosenCard = player2.ChooseCard(player2.GetPossibleCards((Card)comboBoxCardsPlayer1.SelectedItem, (Card)comboBoxCardsPlayer2.SelectedItem, isPlayer1LastWinner), (Card)comboBoxCardsPlayer1.SelectedItem, isPlayer1LastWinner);
                 comboBoxCardsPlayer2.Text = ChoosenCard.Name;
                 comboBoxCardsPlayer2.SelectedItem = ChoosenCard;
 
