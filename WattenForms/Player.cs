@@ -236,7 +236,7 @@ namespace WattenForms
         }
     }
 
-
+    // chatGpt
     public class ChatGpt : Player
     {
         public ChatGpt()
