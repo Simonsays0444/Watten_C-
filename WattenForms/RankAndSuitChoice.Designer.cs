@@ -74,6 +74,7 @@ namespace WattenForms
             this.comboBoxRank.Size = new System.Drawing.Size(273, 37);
             this.comboBoxRank.TabIndex = 1;
             this.comboBoxRank.Text = "Schlag";
+            this.comboBoxRank.SelectedIndexChanged += new System.EventHandler(this.comboBoxRank_SelectedIndexChanged);
             // 
             // comboBoxSuit
             // 
@@ -93,6 +94,7 @@ namespace WattenForms
             this.comboBoxSuit.Size = new System.Drawing.Size(273, 37);
             this.comboBoxSuit.TabIndex = 2;
             this.comboBoxSuit.Text = "Farbe";
+            this.comboBoxSuit.SelectedIndexChanged += new System.EventHandler(this.comboBoxSuit_SelectedIndexChanged);
             // 
             // listBoxPlayer1
             // 

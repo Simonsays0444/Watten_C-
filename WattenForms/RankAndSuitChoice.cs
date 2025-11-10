@@ -26,16 +26,9 @@ namespace WattenForms
             btnShowCardsPlayer1.Visible = player1.PlayerType == PlayerType.Human;
             btnShowCardsPlayer2.Visible = player2.PlayerType == PlayerType.Human;
             
-            comboBoxRank.Enabled = player1.PlayerType == PlayerType.Human;
-            comboBoxSuit.Enabled = player2.PlayerType == PlayerType.Human;
+
             deck.Shuffle();
             DealCards(deck);
-
-            if (player1.PlayerType != PlayerType.Human || player2.PlayerType != PlayerType.Human)
-            {
-                comboBoxSuit.Text = player2.ChooseSuit();
-                comboBoxSuit.SelectedItem = player2.ChooseSuit();
-            }
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -77,6 +70,44 @@ namespace WattenForms
         private void btnShowCardsPlayer2_Click(object sender, EventArgs e)
         {
             listBoxPlayer2.Visible = !listBoxPlayer2.Visible;
+        }
+
+        private void comboBoxRank_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxRank.Enabled = false;
+
+            if (comboBoxSuit.SelectedItem == null)
+            {
+                if (player2.PlayerType != PlayerType.Human)
+                {
+                    comboBoxSuit.Text = player2.ChooseSuit();
+                    comboBoxSuit.SelectedItem = player2.ChooseSuit();
+                }
+
+                if (comboBoxSuit.SelectedItem == null)
+                {
+                    comboBoxSuit.Enabled = player2.PlayerType == PlayerType.Human;
+                }
+            }
+        }
+
+        private void comboBoxSuit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxSuit.Enabled = false;
+
+            if (comboBoxRank.SelectedItem == null)
+            {
+                if (player2.PlayerType != PlayerType.Human)
+                {
+                    comboBoxRank.Text = player2.ChooseRank();
+                    comboBoxRank.SelectedItem = player2.ChooseRank();
+                }
+
+                if (comboBoxRank.SelectedItem == null)
+                {
+                    comboBoxRank.Enabled = player1.PlayerType == PlayerType.Human;
+                }
+            }
         }
     }
 }

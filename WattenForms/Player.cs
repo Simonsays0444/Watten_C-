@@ -118,7 +118,8 @@ namespace WattenForms
 
         public override string ChooseRank()
         {
-            return base.ChooseRank();
+            string ChoosenRank = PlayerCards.GroupBy(k => k.Rank).OrderByDescending(g => g.Count()).First().Key.ToString();
+            return ChoosenRank;
         }
 
         public override string ChooseSuit()
