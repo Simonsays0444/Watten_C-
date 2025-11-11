@@ -35,6 +35,8 @@
             this.comboBoxBot2 = new System.Windows.Forms.ComboBox();
             this.comboBoxAmountOfRounds = new System.Windows.Forms.ComboBox();
             this.btnGo = new System.Windows.Forms.Button();
+            this.lblProzentPlayer1 = new System.Windows.Forms.Label();
+            this.lblProzentPlayer2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblBot1WinCount
@@ -80,7 +82,9 @@
             "Easy",
             "Medium",
             "Hard",
-            "ChatGpt"});
+            "Simon",
+            "Markus",
+            "Destroyer"});
             this.comboBoxBot1.Location = new System.Drawing.Point(163, 190);
             this.comboBoxBot1.Name = "comboBoxBot1";
             this.comboBoxBot1.Size = new System.Drawing.Size(429, 103);
@@ -94,7 +98,9 @@
             "Easy",
             "Medium",
             "Hard",
-            "ChatGpt"});
+            "Simon",
+            "Markus",
+            "Destroyer"});
             this.comboBoxBot2.Location = new System.Drawing.Point(1386, 190);
             this.comboBoxBot2.Name = "comboBoxBot2";
             this.comboBoxBot2.Size = new System.Drawing.Size(429, 103);
@@ -126,7 +132,7 @@
             // 
             this.btnGo.BackColor = System.Drawing.Color.Transparent;
             this.btnGo.Font = new System.Drawing.Font("Microsoft Sans Serif", 75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGo.Location = new System.Drawing.Point(807, 676);
+            this.btnGo.Location = new System.Drawing.Point(824, 682);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(365, 163);
             this.btnGo.TabIndex = 8;
@@ -134,11 +140,37 @@
             this.btnGo.UseVisualStyleBackColor = false;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
+            // lblProzentPlayer1
+            // 
+            this.lblProzentPlayer1.AutoSize = true;
+            this.lblProzentPlayer1.BackColor = System.Drawing.Color.Transparent;
+            this.lblProzentPlayer1.Font = new System.Drawing.Font("Stencil", 75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProzentPlayer1.Location = new System.Drawing.Point(201, 620);
+            this.lblProzentPlayer1.Name = "lblProzentPlayer1";
+            this.lblProzentPlayer1.Size = new System.Drawing.Size(410, 149);
+            this.lblProzentPlayer1.TabIndex = 9;
+            this.lblProzentPlayer1.Text = "0.00%";
+            this.lblProzentPlayer1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblProzentPlayer2
+            // 
+            this.lblProzentPlayer2.AutoSize = true;
+            this.lblProzentPlayer2.BackColor = System.Drawing.Color.Transparent;
+            this.lblProzentPlayer2.Font = new System.Drawing.Font("Stencil", 75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProzentPlayer2.Location = new System.Drawing.Point(1436, 649);
+            this.lblProzentPlayer2.Name = "lblProzentPlayer2";
+            this.lblProzentPlayer2.Size = new System.Drawing.Size(410, 149);
+            this.lblProzentPlayer2.TabIndex = 10;
+            this.lblProzentPlayer2.Text = "0.00%";
+            this.lblProzentPlayer2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FrmBotArena
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2011, 874);
+            this.Controls.Add(this.lblProzentPlayer2);
+            this.Controls.Add(this.lblProzentPlayer1);
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.comboBoxAmountOfRounds);
             this.Controls.Add(this.comboBoxBot2);
@@ -161,5 +193,7 @@
         private System.Windows.Forms.ComboBox comboBoxBot2;
         private System.Windows.Forms.ComboBox comboBoxAmountOfRounds;
         private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.Label lblProzentPlayer1;
+        private System.Windows.Forms.Label lblProzentPlayer2;
     }
 }

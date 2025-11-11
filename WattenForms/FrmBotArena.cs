@@ -36,6 +36,8 @@ namespace WattenForms
         {
             lblBot1WinCount.Text = "0";
             lblBot2WinCount.Text = "0";
+            lblProzentPlayer1.Text = "0%";
+            lblProzentPlayer2.Text = "0%";
 
             if (comboBoxBot1.SelectedItem != null && comboBoxBot2.SelectedItem != null && comboBoxAmountOfRounds.SelectedItem != null)
             {
@@ -76,6 +78,8 @@ namespace WattenForms
                 }
                 lblBot1WinCount.Text = bot1Wins.ToString();
                 lblBot2WinCount.Text = bot2Wins.ToString();
+                lblProzentPlayer1.Text = $"{(((float)bot1Wins / (float)AmountOfRounds) * 100).ToString("F2")} %";
+                lblProzentPlayer2.Text = $"{(((float)bot2Wins / (float)AmountOfRounds) * 100).ToString("F2")} %";
             } 
             else
             {
@@ -96,9 +100,12 @@ namespace WattenForms
                 case "Hard":
                     BotHard BotHard = new BotHard();
                     return BotHard;
-                case "ChatGpt":
-                    ChatGpt BotChatGpt = new ChatGpt();
+                case "Simon":
+                    BotSimon BotChatGpt = new BotSimon();
                     return BotChatGpt;
+                case "Markus":
+                    BotMarkus Markus = new BotMarkus();
+                    return Markus;
                 default:
                     return null;
             }
