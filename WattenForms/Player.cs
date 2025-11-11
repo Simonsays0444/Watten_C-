@@ -300,6 +300,13 @@ namespace WattenForms
             Card choosenCard;
             List<Card> noTrump = new List<Card>();
 
+
+            if (this.WinCount == 2)
+            {
+                choosenCard = PossibleCards.OrderByDescending(c => c.Value).First();
+                return choosenCard;
+            }
+
             if (otherCard != null)
             {
                 foreach (Card card in PossibleCards)
@@ -669,4 +676,170 @@ namespace WattenForms
             return card;
         }
     }
+
+
+    public class BestBotSimon : Player
+    {
+        private HashSet<string> seenCards = new HashSet<string>();
+
+        public BestBotSimon()
+        {
+            Init();
+            PlayerType = PlayerType.Bot;
+            PlayerName = "BestBotSimon";
+        }
+
+        public override string ChooseRank()
+        {
+            // ignoriert die 3 großen Trümpfe bei der Auswertung
+            List<Card> valid = PlayerCards.Where(c => !IsCritical(c)).ToList();
+            if (valid.Count == 0) valid = PlayerCards;
+
+            var grouped = valid
+                .GroupBy(c => c.Rank)
+                .Select(g => new
+                {
+                    Rank = g.Key,
+                    Count = g.Count(),
+                    Sum = g.Sum(x => BaseRankValue(x)),
+                    HasCrit = RankHasCritical(g.Key)
+                })
+                .OrderByDescending(x => x.Count)
+                .ThenByDescending(x => x.HasCrit)
+                .ThenByDescending(x => x.Sum)
+                .ToList();
+
+            return grouped.First().Rank;
+        }
+
+        public override string ChooseSuit()
+        {
+            List<Card> valid = PlayerCards.Where(c => !IsCritical(c)).ToList();
+            if (valid.Count == 0) valid = PlayerCards;
+
+            var grouped = valid
+                .GroupBy(c => c.Suit)
+                .Select(g => new
+                {
+                    Suit = g.Key,
+                    Count = g.Count(),
+                    Sum = g.Sum(x => BaseRankValue(x)),
+                    HasCrit = SuitHasCritical(g.Key)
+                })
+                .OrderByDescending(x => x.Count)
+                .ThenByDescending(x => x.HasCrit)
+                .ThenByDescending(x => x.Sum)
+                .ToList();
+
+            return grouped.First().Suit;
+        }
+
+        public override Card ChooseCard(List<Card> PossibleCards, Card otherCard, bool isPlayer1LastWinner)
+        {
+            bool iAmLeading = otherCard == null;
+            bool needToClose = this.WinCount == 2;
+
+            if (otherCard != null)
+            {
+                seenCards.Add(otherCard.Name);
+            }
+
+            if (iAmLeading)
+            {
+                // Early Game: mittlere Karten spielen, keine wichtigen Trümpfe
+                if (PlayerCards.Count >= 4)
+                {
+                    var midCard = PossibleCards
+                        .Where(c => !IsCritical(c) && !IsTrump(c))
+                        .OrderBy(c => Math.Abs(c.Value - 15))
+                        .FirstOrDefault();
+                    if (midCard != null) return midCard;
+                }
+
+                // Closing Move: sicherer Trumpf zum Sieg
+                if (needToClose)
+                {
+                    var finisher = PossibleCards
+                        .Where(c => IsTrump(c))
+                        .OrderByDescending(c => c.Value)
+                        .FirstOrDefault();
+                    if (finisher != null) return finisher;
+                }
+
+                // Standardfall: kleinste Nicht-Trumpfkarte
+                var lowest = PossibleCards
+                    .Where(c => !IsTrump(c) && !IsCritical(c))
+                    .OrderBy(c => c.Value)
+                    .FirstOrDefault();
+                return lowest ?? PossibleCards.OrderBy(c => c.Value).First();
+            }
+            else
+            {
+                // Wir müssen auf gegnerische Karte reagieren
+                List<Card> winners = PossibleCards.Where(c => WouldWin(c, otherCard, false)).ToList();
+
+                if (winners.Count > 0)
+                {
+                    // so billig wie möglich gewinnen
+                    return winners.OrderBy(c => c.Value).First();
+                }
+
+                // Kein Sieg möglich → billige Karte abwerfen
+                var discard = PossibleCards
+                    .Where(c => !IsTrump(c) && !IsCritical(c))
+                    .OrderBy(c => c.Value)
+                    .FirstOrDefault();
+
+                return discard ?? PossibleCards.OrderBy(c => c.Value).First();
+            }
+        }
+
+        // ======= Hilfsfunktionen =======
+
+        private bool WouldWin(Card me, Card other, bool iAmLeading)
+        {
+            if (me == null || other == null) return iAmLeading;
+
+            if (me.Value > 20 || other.Value > 20 || me.Suit == other.Suit)
+            {
+                if (me.Value > other.Value) return true;
+                if (me.Value < other.Value) return false;
+                return iAmLeading;
+            }
+            return iAmLeading;
+        }
+
+        private bool IsTrump(Card c)
+        {
+            return c.Value >= 20;
+        }
+
+        private bool IsCritical(Card c)
+        {
+            return c.Name == "König Herz" || c.Name == "7 Schellen" || c.Name == "7 Eichel";
+        }
+
+        private int BaseRankValue(Card card)
+        {
+            if (card.Rank == "Unter") return 11;
+            if (card.Rank == "Ober") return 12;
+            if (card.Rank == "König") return 13;
+            if (card.Rank == "Ass") return 14;
+
+            int n;
+            if (int.TryParse(card.Rank, out n)) return n;
+            return 0;
+        }
+
+        private bool SuitHasCritical(string suit)
+        {
+            return suit == "Herz" || suit == "Eichel" || suit == "Schellen";
+        }
+
+        private bool RankHasCritical(string rank)
+        {
+            return rank == "7" || rank == "König";
+        }
+    }
+
 }

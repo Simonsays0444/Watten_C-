@@ -84,7 +84,7 @@
             "Hard",
             "Simon",
             "Markus",
-            "Destroyer"});
+            "BestBotSimon"});
             this.comboBoxBot1.Location = new System.Drawing.Point(163, 190);
             this.comboBoxBot1.Name = "comboBoxBot1";
             this.comboBoxBot1.Size = new System.Drawing.Size(429, 103);
@@ -100,7 +100,7 @@
             "Hard",
             "Simon",
             "Markus",
-            "Destroyer"});
+            "BestBotSimon"});
             this.comboBoxBot2.Location = new System.Drawing.Point(1386, 190);
             this.comboBoxBot2.Name = "comboBoxBot2";
             this.comboBoxBot2.Size = new System.Drawing.Size(429, 103);

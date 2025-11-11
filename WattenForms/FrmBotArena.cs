@@ -106,6 +106,9 @@ namespace WattenForms
                 case "Markus":
                     BotMarkus Markus = new BotMarkus();
                     return Markus;
+                case "BestBotSimon":
+                    BestBotSimon botSimon = new BestBotSimon();
+                    return botSimon;
                 default:
                     return null;
             }
